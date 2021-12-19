@@ -1,0 +1,23 @@
+{
+    "name": "hbsolutions/slim-sac-enhancer",
+    "description": "A few tricks to improve the Single Action Controllers in Slim 4 Framework.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HBS Development Team",
+            "email": "dev.hbsolutions@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.3",
+        "slim/slim": "4.*",
+        "hbsolutions/php-class-name-transformer": "9999999-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "HBS\\SacEnhancer\\": "src/"
+        }
+    }
+}
