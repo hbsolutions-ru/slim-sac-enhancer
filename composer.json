@@ -13,6 +13,7 @@
     "require": {
         "php": "^7.3",
         "slim/slim": "4.*",
+        "php-di/php-di": "9999999-dev",
         "hbsolutions/php-class-name-transformer": "9999999-dev"
     },
     "autoload": {
