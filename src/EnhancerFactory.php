@@ -42,12 +42,12 @@ final class EnhancerFactory
      * @param Request $request
      * @param string $namePattern
      * @param string $fallback
-     * @return mixed
+     * @return EnhancerInterface
      *
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    public function get(string $type, Request $request, string $namePattern, string $fallback)
+    public function get(string $type, Request $request, string $namePattern, string $fallback): EnhancerInterface
     {
         $routeContext = RouteContext::fromRequest($request);
         $callable = $routeContext->getRoute()->getCallable();
@@ -83,6 +83,7 @@ final class EnhancerFactory
             $className = $fallback;
         }
 
-        return $this->container->make($className);
+        // TODO: check that class implements EnhancerInterface
+        return $this->container->get($className);
     }
 }
