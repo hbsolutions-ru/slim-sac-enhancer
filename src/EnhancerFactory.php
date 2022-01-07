@@ -56,16 +56,7 @@ final class EnhancerFactory
             throw new Exception\InvalidArgumentException("Route Callable is not a string");
         }
 
-        try {
-            $reflectionClass = new \ReflectionClass($callable);
-        } catch (\ReflectionException $e) {
-            throw new Exception\ClassNotFound(
-                sprintf("Single Action Controller class not found; Class name: %s; Reason: %s", $callable, $e->getMessage()),
-                $e->getCode(), $e
-            );
-        }
-
-        if (!$reflectionClass->implementsInterface(SingleActionControllerInterface::class)) {
+        if (!$this->implementsInterface($callable, SingleActionControllerInterface::class)) {
             throw new Exception\InvalidArgumentException("Given class does not implement Single Action Controller interface");
         }
 
@@ -83,7 +74,26 @@ final class EnhancerFactory
             $className = $fallback;
         }
 
-        // TODO: check that class implements EnhancerInterface
-        return $this->container->get($className);
+        $enhancer = $this->container->get($className);
+
+        if (!$this->implementsInterface($enhancer, EnhancerInterface::class)) {
+            throw new Exception\UnexpectedValueException("Enhancer class does not implement Enhancer Interface");
+        }
+
+        return $enhancer;
+    }
+
+    private function implementsInterface($objectOrClass, string $interfaceName): bool
+    {
+        try {
+            $reflectionClass = new \ReflectionClass($objectOrClass);
+        } catch (\ReflectionException $e) {
+            throw new Exception\ClassNotFound(
+                sprintf("Class not found; Class name: %s; Reason: %s", $objectOrClass, $e->getMessage()),
+                $e->getCode(), $e
+            );
+        }
+
+        return $reflectionClass->implementsInterface($interfaceName);
     }
 }
