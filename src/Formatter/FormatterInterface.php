@@ -6,4 +6,5 @@ use HBS\SacEnhancer\EnhancerInterface;
 
 interface FormatterInterface extends EnhancerInterface
 {
+    public function format($response);
 }

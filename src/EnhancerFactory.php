@@ -9,7 +9,10 @@ use HBS\ClassNameTransformer\{
     ClassNameTransformer,
     Exception\ExceptionInterface as ClassNameTransformerException
 };
-use HBS\SacEnhancer\Exception;
+use HBS\SacEnhancer\{
+    Exception,
+    Controller\SingleActionControllerInterface,
+};
 
 final class EnhancerFactory
 {
@@ -89,7 +92,7 @@ final class EnhancerFactory
             $reflectionClass = new \ReflectionClass($objectOrClass);
         } catch (\ReflectionException $e) {
             throw new Exception\ClassNotFound(
-                sprintf("Class not found; Class name: %s; Reason: %s", $objectOrClass, $e->getMessage()),
+                sprintf("Class '%s' not found; Reason: %s", $objectOrClass, $e->getMessage()),
                 $e->getCode(), $e
             );
         }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3e2db605286ef1b3cbbfa9e4e1381c2",
+    "content-hash": "febb5c70b62a97e6e491ffbf1cd76936",
     "packages": [
         {
             "name": "hbsolutions/php-class-name-transformer",
@@ -46,6 +46,51 @@
                 "source": "https://github.com/hbsolutions-ru/php-class-name-transformer/tree/main"
             },
             "time": "2021-12-08T09:05:04+00:00"
+        },
+        {
+            "name": "hbsolutions/php-helpers",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hbsolutions-ru/php-helpers.git",
+                "reference": "9216535927692b1a2c971cf81031eaee1e9b5faa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hbsolutions-ru/php-helpers/zipball/9216535927692b1a2c971cf81031eaee1e9b5faa",
+                "reference": "9216535927692b1a2c971cf81031eaee1e9b5faa",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "HBS\\Helpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HBS Development Team",
+                    "email": "dev@hbsolutions.ru"
+                }
+            ],
+            "description": "Common PHP helpers for a PHP project.",
+            "support": {
+                "issues": "https://github.com/hbsolutions-ru/php-helpers/issues",
+                "source": "https://github.com/hbsolutions-ru/php-helpers/tree/main"
+            },
+            "time": "2022-01-05T17:28:32+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -666,12 +711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "0a0b4fc6aa405d652a29ad0085cd8b5a871e7a6c"
+                "reference": "2b746278f9a5442b6eba4a77acf1b6a4d699943f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/0a0b4fc6aa405d652a29ad0085cd8b5a871e7a6c",
-                "reference": "0a0b4fc6aa405d652a29ad0085cd8b5a871e7a6c",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/2b746278f9a5442b6eba4a77acf1b6a4d699943f",
+                "reference": "2b746278f9a5442b6eba4a77acf1b6a4d699943f",
                 "shasum": ""
             },
             "require": {
@@ -694,9 +739,9 @@
                 "laminas/laminas-diactoros": "^2.8",
                 "nyholm/psr7": "^1.4",
                 "nyholm/psr7-server": "^1.0",
-                "phpspec/prophecy": "^1.14",
+                "phpspec/prophecy": "^1.15",
                 "phpspec/prophecy-phpunit": "^2.0",
-                "phpstan/phpstan": "^1.2",
+                "phpstan/phpstan": "^1.3",
                 "phpunit/phpunit": "^9.5",
                 "slim/http": "^1.2",
                 "slim/psr7": "^1.5",
@@ -774,15 +819,16 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-02T23:11:51+00:00"
+            "time": "2022-01-03T18:57:50+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "php-di/php-di": 20,
         "hbsolutions/php-class-name-transformer": 20,
-        "php-di/php-di": 20
+        "hbsolutions/php-helpers": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

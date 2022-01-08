@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HBS\SacEnhancer;
+namespace HBS\SacEnhancer\Controller;
 
 use Psr\Http\Message\{
     ResponseInterface as Response,
