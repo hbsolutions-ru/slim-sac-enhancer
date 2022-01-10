@@ -22,12 +22,12 @@ class CompositeFormatter implements FormatterInterface
 
     public function format($response)
     {
-        foreach ($this->formatters as $formatterClassName) {
+        foreach ($this->formatters as $formatterClass) {
             try {
-                $reflectionClass = new \ReflectionClass($formatterClassName);
+                $reflectionClass = new \ReflectionClass($formatterClass);
             } catch (\ReflectionException $e) {
                 throw new ClassNotFound(
-                    sprintf("Class '%s' not found; Reason: %s", $formatterClassName, $e->getMessage()),
+                    sprintf("Class '%s' not found; Reason: %s", $formatterClass, $e->getMessage()),
                     $e->getCode(), $e
                 );
             }
@@ -37,7 +37,10 @@ class CompositeFormatter implements FormatterInterface
             }
 
             /** @var FormatterInterface $formatter */
-            $formatter = $reflectionClass->newInstance();
+            $formatter = is_string($formatterClass)
+                ? $reflectionClass->newInstance()
+                : $formatterClass;
+
             $response = $formatter->format($response);
         }
 
