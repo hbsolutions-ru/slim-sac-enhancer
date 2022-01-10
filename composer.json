@@ -12,6 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.3",
+        "ext-json": "*",
         "slim/slim": "4.*",
         "php-di/php-di": "9999999-dev",
         "hbsolutions/php-class-name-transformer": "9999999-dev",
