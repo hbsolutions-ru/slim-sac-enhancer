@@ -4,13 +4,35 @@ namespace HBS\SacEnhancer\Controller\Api\Json;
 
 use Psr\Http\Message\{
     ResponseInterface as Response,
+    ResponseFactoryInterface as ResponseFactory,
     ServerRequestInterface as Request,
 };
+use Psr\Log\{
+    LoggerInterface as Logger,
+    NullLogger,
+};
+use DI\Container;
 
 abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActionController
 {
     protected const DEFAULT_CODE_SUCCESS = 200;
     protected const DEFAULT_CODE_ERROR = 400;
+
+    /**
+     * @var ResponseFactory
+     */
+    protected $responseFactory;
+
+    /**
+     * @var Logger
+     */
+    protected $logger;
+
+    public function __construct(Container $container)
+    {
+        $this->responseFactory = $container->get(ResponseFactory::class);
+        $this->logger = $container->has(Logger::class) ? $container->get(Logger::class) : new NullLogger();
+    }
 
     protected function action(Request $request, Response $response, array $args): Response
     {
@@ -34,6 +56,8 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
             $response = $this->action($request, $response, $args)
                 ->withStatus(static::DEFAULT_CODE_SUCCESS);
         } catch (\Exception $exception) {
+            $this->logger->error($exception->getMessage());
+            $response = $this->responseFactory->createResponse();
             $response = $response->withStatus(static::DEFAULT_CODE_ERROR);
         }
 

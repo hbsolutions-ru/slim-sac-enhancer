@@ -14,17 +14,17 @@ use HBS\SacEnhancer\{
     Controller\SingleActionControllerInterface,
 };
 
-final class EnhancerFactory
+final class EnhancerFactory implements EnhancerFactoryInterface
 {
     /**
      * @var Container
      */
-    protected $container;
+    private $container;
 
     /**
      * @var string
      */
-    protected $controllerNamePattern;
+    private $controllerNamePattern;
 
     /**
      * EnhancerFactory constructor.
