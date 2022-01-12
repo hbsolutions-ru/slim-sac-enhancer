@@ -14,7 +14,7 @@ use HBS\SacEnhancer\{
     Controller\SingleActionControllerInterface,
 };
 
-final class EnhancerFactory implements EnhancerFactoryInterface
+class EnhancerFactory implements EnhancerFactoryInterface
 {
     /**
      * @var Container
@@ -50,7 +50,7 @@ final class EnhancerFactory implements EnhancerFactoryInterface
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    public function get(string $type, Request $request, string $namePattern, string $fallback): EnhancerInterface
+    public function get(string $type, Request $request, string $namePattern, string $fallback = null): EnhancerInterface
     {
         $routeContext = RouteContext::fromRequest($request);
         $callable = $routeContext->getRoute()->getCallable();
@@ -74,6 +74,9 @@ final class EnhancerFactory implements EnhancerFactoryInterface
         try {
             $className = $resolver->resolve($callable, $type);
         } catch (ClassNameTransformerException $e) {
+            if ($fallback === null) {
+                throw new Exception\ClassNotFound("Enhancer class not found");
+            }
             $className = $fallback;
         }
 

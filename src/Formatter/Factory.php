@@ -5,7 +5,7 @@ namespace HBS\SacEnhancer\Formatter;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use HBS\SacEnhancer\EnhancerFactoryInterface;
 
-final class Factory
+class Factory
 {
     /**
      * @var EnhancerFactoryInterface
@@ -33,6 +33,9 @@ final class Factory
      * @param Request $request
      * @param string $fallbackFormatter
      * @return FormatterInterface
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \HBS\SacEnhancer\Exception\ExceptionInterface
      */
     public function get(Request $request, string $fallbackFormatter): FormatterInterface
     {

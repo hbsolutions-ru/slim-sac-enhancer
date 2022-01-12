@@ -12,6 +12,11 @@ use Psr\Log\{
     NullLogger,
 };
 use DI\Container;
+use HBS\SacEnhancer\{
+    Exception\ExceptionInterface,
+    Formatter\Common\EmptyFormatter,
+    Formatter\Factory as FormatterFactory,
+};
 
 abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActionController
 {
@@ -28,10 +33,16 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
      */
     protected $logger;
 
+    /**
+     * @var FormatterFactory
+     */
+    protected $formatterFactory;
+
     public function __construct(Container $container)
     {
         $this->responseFactory = $container->get(ResponseFactory::class);
         $this->logger = $container->has(Logger::class) ? $container->get(Logger::class) : new NullLogger();
+        $this->formatterFactory = $container->get(FormatterFactory::class);
     }
 
     protected function action(Request $request, Response $response, array $args): Response
@@ -44,6 +55,14 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
         );
 
         if ($apiResponse !== null) {
+            try {
+                $formatter = $this->formatterFactory->get($request, EmptyFormatter::class);
+                $apiResponse = $formatter->format($apiResponse);
+            } catch (ExceptionInterface $exception) {
+                $this->logger->error(
+                    sprintf("Formatter error: %s", $exception->getMessage())
+                );
+            }
             $response->getBody()->write((string)json_encode($apiResponse));
         }
 
