@@ -4,7 +4,6 @@ namespace HBS\SacEnhancer\Controller\Api\Json;
 
 use Psr\Http\Message\{
     ResponseInterface as Response,
-    ResponseFactoryInterface as ResponseFactory,
     ServerRequestInterface as Request,
 };
 use Psr\Log\{
@@ -13,6 +12,7 @@ use Psr\Log\{
 };
 use DI\Container;
 use HBS\SacEnhancer\{
+    Controller\Api\Json\ErrorResponse\Factory as ErrorResponseFactory,
     Exception\ExceptionInterface,
     Formatter\Common\EmptyFormatter,
     Formatter\Factory as FormatterFactory,
@@ -21,17 +21,16 @@ use HBS\SacEnhancer\{
 abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActionController
 {
     protected const DEFAULT_CODE_SUCCESS = 200;
-    protected const DEFAULT_CODE_ERROR = 400;
-
-    /**
-     * @var ResponseFactory
-     */
-    protected $responseFactory;
 
     /**
      * @var Logger
      */
     protected $logger;
+
+    /**
+     * @var ErrorResponseFactory
+     */
+    protected $errorResponseFactory;
 
     /**
      * @var FormatterFactory
@@ -40,8 +39,8 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
 
     public function __construct(Container $container)
     {
-        $this->responseFactory = $container->get(ResponseFactory::class);
         $this->logger = $container->has(Logger::class) ? $container->get(Logger::class) : new NullLogger();
+        $this->errorResponseFactory = $container->get(ErrorResponseFactory::class);
         $this->formatterFactory = $container->get(FormatterFactory::class);
     }
 
@@ -76,8 +75,7 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
                 ->withStatus(static::DEFAULT_CODE_SUCCESS);
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
-            $response = $this->responseFactory->createResponse();
-            $response = $response->withStatus(static::DEFAULT_CODE_ERROR);
+            $response = $this->errorResponseFactory->get($exception, $request);
         }
 
         return $response
