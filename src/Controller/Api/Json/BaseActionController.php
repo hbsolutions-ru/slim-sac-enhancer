@@ -49,7 +49,7 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
         if ($apiResponse !== null) {
             try {
                 $formatter = $this->formatterFactory->get($request, EmptyFormatter::class);
-                $apiResponse = $formatter->format($apiResponse);
+                $apiResponse = $formatter->format($apiResponse, $request->getQueryParams());
             } catch (ExceptionInterface $exception) {
                 $this->logger->error(
                     sprintf("Formatter error: %s", $exception->getMessage())

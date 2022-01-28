@@ -20,7 +20,7 @@ class CompositeFormatter implements FormatterInterface
         $this->formatters = $formatters;
     }
 
-    public function format($response)
+    public function format($response, $queryArgs = [])
     {
         foreach ($this->formatters as $formatterClass) {
             try {

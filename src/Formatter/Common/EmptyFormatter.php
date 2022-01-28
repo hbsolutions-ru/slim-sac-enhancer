@@ -6,7 +6,7 @@ use HBS\SacEnhancer\Formatter\FormatterInterface;
 
 class EmptyFormatter implements FormatterInterface
 {
-    public function format($response)
+    public function format($response, $queryArgs = [])
     {
         return $response;
     }
