@@ -7,12 +7,12 @@ use HBS\SacEnhancer\Formatter\FormatterInterface;
 
 abstract class BaseFormatter implements FormatterInterface
 {
-    abstract protected function formatArray(array $response);
+    abstract protected function formatArray(array $response, $queryArgs = []);
 
     public function format($response, $queryArgs = [])
     {
         $this->validate($response);
-        return $this->formatArray($response);
+        return $this->formatArray($response, $queryArgs);
     }
 
     protected function validate($response): void

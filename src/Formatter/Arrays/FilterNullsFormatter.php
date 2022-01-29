@@ -6,7 +6,7 @@ use HBS\Helpers\ArrayHelper;
 
 class FilterNullsFormatter extends BaseFormatter
 {
-    protected function formatArray(array $response)
+    protected function formatArray(array $response, $queryArgs = [])
     {
         return ArrayHelper::filterNulls($response);
     }
