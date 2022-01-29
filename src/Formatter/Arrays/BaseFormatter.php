@@ -7,7 +7,7 @@ use HBS\SacEnhancer\Formatter\FormatterInterface;
 
 abstract class BaseFormatter implements FormatterInterface
 {
-    abstract protected function formatArray(array $response, $queryArgs = []);
+    abstract protected function formatArray(array $response, array $queryArgs = []);
 
     public function format($response, $queryArgs = [])
     {

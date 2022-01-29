@@ -7,7 +7,7 @@ use HBS\SacEnhancer\Formatter\FormatterInterface;
 
 class ToArrayFormatter implements FormatterInterface
 {
-    public function format($response, $queryArgs = [])
+    public function format($response, array $queryArgs = [])
     {
         return ObjectHelper::toArray($response);
     }

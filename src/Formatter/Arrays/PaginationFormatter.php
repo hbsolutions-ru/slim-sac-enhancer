@@ -25,7 +25,7 @@ class PaginationFormatter extends BaseFormatter
         $this->defaultLimit = $defaultLimit;
     }
 
-    protected function formatArray(array $response, $queryArgs = [])
+    protected function formatArray(array $response, array $queryArgs = [])
     {
         $limit = intval($queryArgs[static::LIMIT] ?? $this->defaultLimit);
         $offset = intval($queryArgs[static::OFFSET] ?? 0);

@@ -9,7 +9,7 @@ abstract class BaseFormatter implements FormatterInterface
 {
     abstract protected function formatObject($response);
 
-    public function format($response, $queryArgs = [])
+    public function format($response, array $queryArgs = [])
     {
         $this->validate($response);
         return $this->formatObject($response);

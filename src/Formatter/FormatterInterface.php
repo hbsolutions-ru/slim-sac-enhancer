@@ -6,5 +6,5 @@ use HBS\SacEnhancer\EnhancerInterface;
 
 interface FormatterInterface extends EnhancerInterface
 {
-    public function format($response, $queryArgs = []);
+    public function format($response, array $queryArgs = []);
 }

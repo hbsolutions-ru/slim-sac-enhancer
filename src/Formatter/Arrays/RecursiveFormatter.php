@@ -18,9 +18,9 @@ class RecursiveFormatter extends BaseFormatter
         $this->formatter = $formatter;
     }
 
-    public function formatArray(array $response, $queryArgs = [])
+    public function formatArray(array $response, array $queryArgs = [])
     {
-        $response = $this->formatter->format($response);
+        $response = $this->formatter->format($response, $queryArgs);
 
         if (!is_array($response)) {
             return $response;
@@ -28,7 +28,7 @@ class RecursiveFormatter extends BaseFormatter
 
         foreach ($response as &$item) {
             if (is_array($item)) {
-                $item = $this->formatArray($item);
+                $item = $this->formatArray($item, $queryArgs);
             }
         }
 

@@ -16,7 +16,7 @@ class MapFormatter implements FormatterInterface
         $this->mapper = $mapper;
     }
 
-    public function format($response, $queryArgs = [])
+    public function format($response, array $queryArgs = [])
     {
         return call_user_func($this->mapper, $response);
     }

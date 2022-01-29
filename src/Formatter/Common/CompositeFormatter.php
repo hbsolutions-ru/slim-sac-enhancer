@@ -20,7 +20,7 @@ class CompositeFormatter implements FormatterInterface
         $this->formatters = $formatters;
     }
 
-    public function format($response, $queryArgs = [])
+    public function format($response, array $queryArgs = [])
     {
         foreach ($this->formatters as $formatterClass) {
             try {
@@ -41,7 +41,7 @@ class CompositeFormatter implements FormatterInterface
                 ? $reflectionClass->newInstance()
                 : $formatterClass;
 
-            $response = $formatter->format($response);
+            $response = $formatter->format($response, $queryArgs);
         }
 
         return $response;
