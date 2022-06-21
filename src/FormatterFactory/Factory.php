@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace HBS\SacEnhancer\Formatter;
+namespace HBS\SacEnhancer\FormatterFactory;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
+use HBS\SacEnhancer\Formatter\FormatterInterface;
 use HBS\SacEnhancer\EnhancerFactoryInterface;
 
-class Factory
+class Factory implements FormatterFactoryInterface
 {
     /**
      * @var EnhancerFactoryInterface

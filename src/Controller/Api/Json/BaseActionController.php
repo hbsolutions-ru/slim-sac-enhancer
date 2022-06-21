@@ -14,7 +14,7 @@ use DI\Container;
 use HBS\SacEnhancer\{
     Exception\ExceptionInterface,
     Formatter\Common\EmptyFormatter,
-    Formatter\Factory as FormatterFactory,
+    FormatterFactory\ResponseFormatterFactoryInterface as ResponseFormatterFactory,
 };
 
 abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActionController
@@ -27,14 +27,14 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
     protected $logger;
 
     /**
-     * @var FormatterFactory
+     * @var ResponseFormatterFactory
      */
-    protected $formatterFactory;
+    protected $responseFormatterFactory;
 
     public function __construct(Container $container)
     {
         $this->logger = $container->has(Logger::class) ? $container->get(Logger::class) : new NullLogger();
-        $this->formatterFactory = $container->get(FormatterFactory::class);
+        $this->responseFormatterFactory = $container->get(ResponseFormatterFactory::class);
     }
 
     protected function action(Request $request, Response $response, array $args): Response
@@ -48,7 +48,7 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
 
         if ($apiResponse !== null) {
             try {
-                $formatter = $this->formatterFactory->get($request, EmptyFormatter::class);
+                $formatter = $this->responseFormatterFactory->get($request, EmptyFormatter::class);
                 $apiResponse = $formatter->format($apiResponse, $request->getQueryParams());
             } catch (ExceptionInterface $exception) {
                 $this->logger->error(
