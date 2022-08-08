@@ -9,6 +9,7 @@ use HBS\ClassNameTransformer\{
     ClassNameTransformer,
     Exception\ExceptionInterface as ClassNameTransformerException
 };
+use HBS\Helpers\ObjectHelper;
 use HBS\SacEnhancer\{
     Exception,
     Controller\SingleActionControllerInterface,
@@ -59,7 +60,7 @@ class EnhancerFactory implements EnhancerFactoryInterface
             throw new Exception\InvalidArgumentException("Route Callable is not a string");
         }
 
-        if (!$this->implementsInterface($callable, SingleActionControllerInterface::class)) {
+        if (!ObjectHelper::implementsInterface($callable, SingleActionControllerInterface::class)) {
             throw new Exception\InvalidArgumentException("Given class does not implement Single Action Controller interface");
         }
 
@@ -82,24 +83,10 @@ class EnhancerFactory implements EnhancerFactoryInterface
 
         $enhancer = $this->container->get($className);
 
-        if (!$this->implementsInterface($enhancer, EnhancerInterface::class)) {
+        if (!ObjectHelper::implementsInterface($enhancer, EnhancerInterface::class)) {
             throw new Exception\UnexpectedValueException("Enhancer class does not implement Enhancer Interface");
         }
 
         return $enhancer;
-    }
-
-    private function implementsInterface($objectOrClass, string $interfaceName): bool
-    {
-        try {
-            $reflectionClass = new \ReflectionClass($objectOrClass);
-        } catch (\ReflectionException $e) {
-            throw new Exception\ClassNotFound(
-                sprintf("Class '%s' not found; Reason: %s", $objectOrClass, $e->getMessage()),
-                $e->getCode(), $e
-            );
-        }
-
-        return $reflectionClass->implementsInterface($interfaceName);
     }
 }
