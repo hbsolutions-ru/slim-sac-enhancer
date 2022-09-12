@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8003935fd4c4b8b3a4e922c55e418750",
+    "content-hash": "d80ab6223aa1fdb760b98324f32c3e7b",
     "packages": [
         {
             "name": "hbsolutions/php-class-name-transformer",
@@ -12,16 +12,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hbsolutions-ru/php-class-name-transformer.git",
-                "reference": "febd984105554dc83d2e161cb9c54ed7a1444773"
+                "reference": "f2c7aed90d52e3e388087ab9b938383e9ee8bd30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hbsolutions-ru/php-class-name-transformer/zipball/febd984105554dc83d2e161cb9c54ed7a1444773",
-                "reference": "febd984105554dc83d2e161cb9c54ed7a1444773",
+                "url": "https://api.github.com/repos/hbsolutions-ru/php-class-name-transformer/zipball/f2c7aed90d52e3e388087ab9b938383e9ee8bd30",
+                "reference": "f2c7aed90d52e3e388087ab9b938383e9ee8bd30",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3"
+                "php": "^7.4|^8"
             },
             "default-branch": true,
             "type": "library",
@@ -45,7 +45,7 @@
                 "issues": "https://github.com/hbsolutions-ru/php-class-name-transformer/issues",
                 "source": "https://github.com/hbsolutions-ru/php-class-name-transformer/tree/main"
             },
-            "time": "2021-12-08T09:05:04+00:00"
+            "time": "2022-09-12T15:56:07+00:00"
         },
         {
             "name": "hbsolutions/php-helpers",
@@ -53,17 +53,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hbsolutions-ru/php-helpers.git",
-                "reference": "3e76abac97b9f5e1fc381c01434da09ae8109652"
+                "reference": "55c4877a932e5f8bdba0283bcd810938b094d134"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hbsolutions-ru/php-helpers/zipball/3e76abac97b9f5e1fc381c01434da09ae8109652",
-                "reference": "3e76abac97b9f5e1fc381c01434da09ae8109652",
+                "url": "https://api.github.com/repos/hbsolutions-ru/php-helpers/zipball/55c4877a932e5f8bdba0283bcd810938b094d134",
+                "reference": "55c4877a932e5f8bdba0283bcd810938b094d134",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.3"
+                "php": "^7.3|^8"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9"
@@ -90,7 +90,7 @@
                 "issues": "https://github.com/hbsolutions-ru/php-helpers/issues",
                 "source": "https://github.com/hbsolutions-ru/php-helpers/tree/main"
             },
-            "time": "2022-08-08T08:19:11+00:00"
+            "time": "2022-08-29T15:35:27+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -98,21 +98,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "23ff3d2f724cfd9e628382d3905e650b9d22f516"
+                "reference": "e04e46a3aeff6946a06b6c06c7fa96f1461d3cf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/23ff3d2f724cfd9e628382d3905e650b9d22f516",
-                "reference": "23ff3d2f724cfd9e628382d3905e650b9d22f516",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/e04e46a3aeff6946a06b6c06c7fa96f1461d3cf6",
+                "reference": "e04e46a3aeff6946a06b6c06c7fa96f1461d3cf6",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "pestphp/pest": "^1.18",
-                "phpstan/phpstan": "^0.12.98",
-                "symfony/var-dumper": "^5.3"
+                "nesbot/carbon": "^2.61",
+                "pestphp/pest": "^1.21.3",
+                "phpstan/phpstan": "^1.8.2",
+                "symfony/var-dumper": "^5.4.11"
             },
             "default-branch": true,
             "type": "library",
@@ -150,7 +151,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2022-06-08T09:44:12+00:00"
+            "time": "2022-09-08T13:51:30+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -263,12 +264,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-DI/PHP-DI.git",
-                "reference": "9a1d0e8fc4c36ae6f5734dd214ce843b099cd432"
+                "reference": "6d4ac8be4b0322200a55a0fbf5d32b2be3c1062b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/9a1d0e8fc4c36ae6f5734dd214ce843b099cd432",
-                "reference": "9a1d0e8fc4c36ae6f5734dd214ce843b099cd432",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/6d4ac8be4b0322200a55a0fbf5d32b2be3c1062b",
+                "reference": "6d4ac8be4b0322200a55a0fbf5d32b2be3c1062b",
                 "shasum": ""
             },
             "require": {
@@ -332,7 +333,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-18T09:30:16+00:00"
+            "time": "2022-08-21T12:10:13+00:00"
         },
         {
             "name": "php-di/phpdoc-reader",
@@ -651,30 +652,31 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
+                    "Psr\\Log\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -695,9 +697,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
+                "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
-            "time": "2021-05-03T11:20:27+00:00"
+            "time": "2021-07-14T16:46:02+00:00"
         },
         {
             "name": "slim/slim",
@@ -827,9 +829,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3",
+        "php": "^7.4|^8",
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
