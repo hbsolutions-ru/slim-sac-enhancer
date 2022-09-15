@@ -14,10 +14,7 @@ class PaginationFormatter extends BaseFormatter
      */
     protected $mapper;
 
-    /**
-     * @var int
-     */
-    protected $defaultLimit;
+    protected int $defaultLimit;
 
     public function __construct(?callable $mapper = null, int $defaultLimit = 20)
     {

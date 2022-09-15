@@ -17,15 +17,9 @@ use HBS\SacEnhancer\{
 
 class EnhancerFactory implements EnhancerFactoryInterface
 {
-    /**
-     * @var Container
-     */
-    private $container;
+    private Container $container;
 
-    /**
-     * @var string
-     */
-    private $controllerNamePattern;
+    private string $controllerNamePattern;
 
     /**
      * EnhancerFactory constructor.
@@ -45,13 +39,13 @@ class EnhancerFactory implements EnhancerFactoryInterface
      * @param string $type
      * @param Request $request
      * @param string $namePattern
-     * @param string $fallback
+     * @param ?string $fallback
      * @return EnhancerInterface
      *
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    public function get(string $type, Request $request, string $namePattern, string $fallback = null): EnhancerInterface
+    public function get(string $type, Request $request, string $namePattern, ?string $fallback = null): EnhancerInterface
     {
         $routeContext = RouteContext::fromRequest($request);
         $callable = $routeContext->getRoute()->getCallable();

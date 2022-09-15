@@ -8,15 +8,9 @@ use HBS\SacEnhancer\EnhancerFactoryInterface;
 
 class Factory implements FormatterFactoryInterface
 {
-    /**
-     * @var EnhancerFactoryInterface
-     */
-    private $enhancerFactory;
+    private EnhancerFactoryInterface $enhancerFactory;
 
-    /**
-     * @var string
-     */
-    private $formatterNamePattern;
+    private string $formatterNamePattern;
 
     /**
      * Factory constructor.

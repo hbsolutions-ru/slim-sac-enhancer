@@ -10,10 +10,7 @@ use HBS\SacEnhancer\{
 
 class CompositeFormatter implements FormatterInterface
 {
-    /**
-     * @var array
-     */
-    protected $formatters;
+    protected array $formatters;
 
     public function __construct(array $formatters)
     {

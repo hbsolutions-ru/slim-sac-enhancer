@@ -4,10 +4,7 @@ namespace HBS\SacEnhancer\Formatter\Objects;
 
 class DateTimeFormatter extends BaseFormatter
 {
-    /**
-     * @var string
-     */
-    protected $format;
+    protected string $format;
 
     public function __construct(string $format)
     {

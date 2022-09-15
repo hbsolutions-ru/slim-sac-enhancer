@@ -2,16 +2,11 @@
 
 namespace HBS\SacEnhancer\Formatter\Arrays;
 
-use HBS\SacEnhancer\{
-    Formatter\FormatterInterface,
-};
+use HBS\SacEnhancer\Formatter\FormatterInterface;
 
 class RecursiveFormatter extends BaseFormatter
 {
-    /**
-     * @var FormatterInterface
-     */
-    protected $formatter;
+    protected FormatterInterface $formatter;
 
     public function __construct(FormatterInterface $formatter)
     {

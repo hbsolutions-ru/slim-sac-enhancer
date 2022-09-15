@@ -21,15 +21,9 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
 {
     protected const DEFAULT_CODE_SUCCESS = 200;
 
-    /**
-     * @var Logger
-     */
-    protected $logger;
+    protected Logger $logger;
 
-    /**
-     * @var ResponseFormatterFactory
-     */
-    protected $responseFormatterFactory;
+    protected ResponseFormatterFactory $responseFormatterFactory;
 
     public function __construct(Container $container)
     {
