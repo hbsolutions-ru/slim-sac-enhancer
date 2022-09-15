@@ -6,7 +6,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use HBS\SacEnhancer\Formatter\FormatterInterface;
 use HBS\SacEnhancer\EnhancerFactoryInterface;
 
-class Factory implements FormatterFactoryInterface
+abstract class BaseFactory implements FormatterFactoryInterface
 {
     private EnhancerFactoryInterface $enhancerFactory;
 
