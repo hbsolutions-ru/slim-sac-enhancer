@@ -10,6 +10,14 @@
         }
     ],
     "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "HBS\\SacEnhancer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
+    },
     "require": {
         "php": "^7.4||^8",
         "ext-json": "*",
@@ -18,9 +26,7 @@
         "hbsolutions/php-class-name-transformer": "9999999-dev",
         "hbsolutions/php-helpers": "9999999-dev"
     },
-    "autoload": {
-        "psr-4": {
-            "HBS\\SacEnhancer\\": "src/"
-        }
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }
