@@ -7,7 +7,7 @@ use HBS\SacEnhancer\Formatter\Arrays\FilterNullsFormatter;
 
 final class FilterNullsFormatterTest extends TestCase
 {
-    public function testFormatArray(): void
+    public function testFormat(): void
     {
         $formatter = new FilterNullsFormatter();
 

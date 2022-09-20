@@ -2,6 +2,8 @@
 
 namespace HBS\SacEnhancer\Formatter\Objects;
 
+use DateTime;
+
 class DateTimeFormatter extends BaseFormatter
 {
     protected string $format;
@@ -13,7 +15,7 @@ class DateTimeFormatter extends BaseFormatter
 
     protected function formatObject($response)
     {
-        if (!($response instanceof \DateTime)) {
+        if (!($response instanceof DateTime)) {
             return $response;
         }
 
