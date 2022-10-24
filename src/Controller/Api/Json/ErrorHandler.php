@@ -2,14 +2,21 @@
 
 namespace HBS\SacEnhancer\Controller\Api\Json;
 
+use InvalidArgumentException;
 use Throwable;
+
 use Psr\Http\Message\{
     ResponseFactoryInterface as ResponseFactory,
     ResponseInterface as Response,
     ServerRequestInterface as Request,
 };
 use Slim\Interfaces\ErrorHandlerInterface;
-use HBS\SacEnhancer\Formatter\FormatterInterface;
+use HBS\SacEnhancer\{
+    Formatter\FormatterInterface,
+    Utility\HttpStatusUtility,
+};
+
+use function json_encode;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
@@ -40,8 +47,9 @@ class ErrorHandler implements ErrorHandlerInterface
         bool $logErrors,
         bool $logErrorDetails
     ): Response {
-        $responseCode = $this->exceptionCodeToHttp ? $exception->getCode() : $this->responseCode;
-        $response = $this->responseFactory->createResponse($responseCode ?: self::DEFAULT_CODE_ERROR);
+        $response = $this->responseFactory->createResponse(
+            $this->getHttpResponseStatusCode($exception)
+        );
 
         $responseData = $this->formatter->format($exception);
 
@@ -52,5 +60,18 @@ class ErrorHandler implements ErrorHandlerInterface
         $response->getBody()->write((string)json_encode($responseData));
 
         return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    protected function getHttpResponseStatusCode(Throwable $exception): int
+    {
+        if (!$this->exceptionCodeToHttp) {
+            return $this->responseCode;
+        }
+
+        try {
+            return HttpStatusUtility::filterStatus($exception->getCode());
+        } catch (InvalidArgumentException $argumentException) {
+            return $this->responseCode;
+        }
     }
 }

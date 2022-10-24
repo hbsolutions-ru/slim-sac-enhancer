@@ -7,7 +7,7 @@ use Psr\Http\Message\{
     ServerRequestInterface as Request,
 };
 use Psr\Log\{
-    LoggerInterface as Logger,
+    LoggerInterface,
     NullLogger,
 };
 use DI\Container;
@@ -21,13 +21,13 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
 {
     protected const DEFAULT_CODE_SUCCESS = 200;
 
-    protected Logger $logger;
+    protected LoggerInterface $logger;
 
     protected ResponseFormatterFactory $responseFormatterFactory;
 
     public function __construct(Container $container)
     {
-        $this->logger = $container->has(Logger::class) ? $container->get(Logger::class) : new NullLogger();
+        $this->logger = $container->has(LoggerInterface::class) ? $container->get(LoggerInterface::class) : new NullLogger();
         $this->responseFormatterFactory = $container->get(ResponseFormatterFactory::class);
     }
 
