@@ -10,6 +10,13 @@ use Psr\Http\Message\{
     ResponseInterface as Response,
     ServerRequestInterface as Request,
 };
+use Psr\Log\{
+    LoggerInterface,
+    LogLevel,
+    NullLogger,
+};
+
+use Fig\Http\Message\StatusCodeInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
 use HBS\SacEnhancer\{
     Formatter\FormatterInterface,
@@ -20,9 +27,8 @@ use function json_encode;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
-    protected const DEFAULT_CODE_ERROR = 400;
-
-    protected int $responseCode = self::DEFAULT_CODE_ERROR;
+    protected int $responseCode = StatusCodeInterface::STATUS_BAD_REQUEST;
+    protected string $logLevel = LogLevel::ERROR;
 
     protected ResponseFactory $responseFactory;
 
@@ -30,14 +36,18 @@ class ErrorHandler implements ErrorHandlerInterface
 
     protected bool $exceptionCodeToHttp = false;
 
+    protected LoggerInterface $logger;
+
     public function __construct(
         ResponseFactory $responseFactory,
         FormatterInterface $formatter,
-        bool $exceptionCodeToHttp = false
+        bool $exceptionCodeToHttp = false,
+        LoggerInterface $logger = null
     ) {
         $this->responseFactory = $responseFactory;
         $this->formatter = $formatter;
         $this->exceptionCodeToHttp = $exceptionCodeToHttp;
+        $this->logger = $logger ?: new NullLogger();
     }
 
     public function __invoke(
@@ -47,6 +57,10 @@ class ErrorHandler implements ErrorHandlerInterface
         bool $logErrors,
         bool $logErrorDetails
     ): Response {
+        if ($logErrors) {
+            $this->logger->log($this->logLevel, $exception->getMessage());
+        }
+
         $response = $this->responseFactory->createResponse(
             $this->getHttpResponseStatusCode($exception)
         );
