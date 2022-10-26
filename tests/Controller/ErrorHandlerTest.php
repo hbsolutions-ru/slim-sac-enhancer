@@ -11,11 +11,11 @@ use Slim\Psr7\Factory\{
 use HBS\SacEnhancer\Controller\Api\Json\ErrorHandler;
 
 use PHPUnit\Framework\TestCase;
-use Tests\Controller\Objects\ExceptionFormatter;
+use Tests\Objects\ExceptionFormatter;
 
 final class ErrorHandlerTest extends TestCase
 {
-    public function testErrorHandler()
+    public function testErrorHandler(): void
     {
         $httpResponseCode = 404;
         $errorMessage = "Page not found";

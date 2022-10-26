@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Controller\Objects;
+namespace Tests\Objects;
 
 use Throwable;
 use HBS\SacEnhancer\Formatter\Throwable\BaseThrowableFormatter;
