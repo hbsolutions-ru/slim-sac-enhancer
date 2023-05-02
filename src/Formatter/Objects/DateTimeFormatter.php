@@ -3,6 +3,7 @@
 namespace HBS\SacEnhancer\Formatter\Objects;
 
 use DateTime;
+use DateTimeImmutable;
 
 class DateTimeFormatter extends BaseFormatter
 {
@@ -15,7 +16,10 @@ class DateTimeFormatter extends BaseFormatter
 
     protected function formatObject($response)
     {
-        if (!($response instanceof DateTime)) {
+        if (!(
+            ($response instanceof DateTime) ||
+            ($response instanceof DateTimeImmutable)
+        )) {
             return $response;
         }
 
