@@ -82,6 +82,14 @@ class ErrorHandler implements ErrorHandlerInterface
             return $this->responseCode;
         }
 
+        // PDO could throw exceptions with string codes
+        // E.g.,
+        // SQLSTATE[HY000]: General error - will return "HY000" as code,
+        // SQLSTATE[42S02]: Base table or view not found... - will return "42S02" as code
+        if (!is_int($exception->getCode())) {
+            return $this->responseCode;
+        }
+
         try {
             return HttpStatusUtility::filterStatus($exception->getCode());
         } catch (InvalidArgumentException $argumentException) {
