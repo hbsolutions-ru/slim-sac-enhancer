@@ -25,10 +25,14 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
 
     protected ResponseFormatterFactory $responseFormatterFactory;
 
-    public function __construct(Container $container)
+    protected ?string $defaultFormatter = null;
+
+    // TODO: abandon PHP 7.x support to avoid such boilerplate
+    public function __construct(Container $container, ?string $defaultFormatter = null)
     {
         $this->logger = $container->has(LoggerInterface::class) ? $container->get(LoggerInterface::class) : new NullLogger();
         $this->responseFormatterFactory = $container->get(ResponseFormatterFactory::class);
+        $this->defaultFormatter = $defaultFormatter;
     }
 
     protected function action(Request $request, Response $response, array $args): Response
@@ -42,7 +46,7 @@ abstract class BaseActionController extends \HBS\SacEnhancer\Controller\BaseActi
 
         if ($apiResponse !== null) {
             try {
-                $formatter = $this->responseFormatterFactory->get($request, EmptyFormatter::class);
+                $formatter = $this->responseFormatterFactory->get($request, $this->defaultFormatter ?? EmptyFormatter::class);
                 $apiResponse = $formatter->format($apiResponse, $request->getQueryParams());
             } catch (ExceptionInterface $exception) {
                 $this->logger->error(
