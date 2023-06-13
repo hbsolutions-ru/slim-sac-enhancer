@@ -10,6 +10,7 @@ use Psr\Http\Message\{
     ResponseInterface as Response,
     ServerRequestInterface as Request,
 };
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Log\{
     LoggerInterface,
     LogLevel,
@@ -21,6 +22,7 @@ use Slim\Interfaces\ErrorHandlerInterface;
 use HBS\SacEnhancer\{
     Formatter\FormatterInterface,
     Utility\HttpStatusUtility,
+    EmptyRequestHandler,
 };
 
 use function json_encode;
@@ -38,16 +40,20 @@ class ErrorHandler implements ErrorHandlerInterface
 
     protected LoggerInterface $logger;
 
+    protected ?MiddlewareInterface $middleware = null;
+
     public function __construct(
         ResponseFactory $responseFactory,
         FormatterInterface $formatter,
         bool $exceptionCodeToHttp = false,
-        LoggerInterface $logger = null
+        LoggerInterface $logger = null,
+        ?MiddlewareInterface $middleware = null
     ) {
         $this->responseFactory = $responseFactory;
         $this->formatter = $formatter;
         $this->exceptionCodeToHttp = $exceptionCodeToHttp;
         $this->logger = $logger ?: new NullLogger();
+        $this->middleware = $middleware;
     }
 
     public function __invoke(
@@ -67,13 +73,18 @@ class ErrorHandler implements ErrorHandlerInterface
 
         $responseData = $this->formatter->format($exception);
 
-        if ($responseData === null) {
+        if ($responseData !== null) {
+            $response->getBody()->write((string)json_encode($responseData));
+            $response = $response->withHeader('Content-Type', 'application/json');
+        }
+
+        if ($this->middleware === null) {
             return $response;
         }
 
-        $response->getBody()->write((string)json_encode($responseData));
+        $requestHandler = new EmptyRequestHandler($response);
 
-        return $response->withHeader('Content-Type', 'application/json');
+        return $this->middleware->process($request, $requestHandler);
     }
 
     protected function getHttpResponseStatusCode(Throwable $exception): int
